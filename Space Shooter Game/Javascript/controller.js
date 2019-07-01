@@ -1,7 +1,7 @@
 /**
- * @class - Keyboard class for handling all keyboard input
+ * @class - Controller class for handling all Controller input
  */
-class Keyboard {
+class Controller {
     constructor() {
 
         this.keyCodes = [];
@@ -9,12 +9,17 @@ class Keyboard {
 
         this.lastChar = 'a';
         this.char = 'a';
+
+        this.pointer = createVector(0, 0);
     }
 
     /**
-     * @function - Keyboard update function, Called for each keyup and keydown
+     * @function - Controller update function, Called for each keyup and keydown
      */
     update() {
+
+        this.pointer.x = mouseX - windowWidth / 2 + viewport.pos.x;
+        this.pointer.y = mouseY - windowHeight / 2 + viewport.pos.y;
 
         this.leftarrow = false;
         this.uparrow = false;
@@ -54,8 +59,9 @@ class Keyboard {
         }
     }
 
+
     /**
-     * @function - Keyboard setup function
+     * @function - Controller setup function
      */
     setup() {
         this.keyCodes = []; // You could also use an array
@@ -131,7 +137,7 @@ class Keyboard {
 
 onkeydown = onkeyup = function (e) {
     e = e || event; // to deal with IE
-    keyboard.keyCodes[e.keyCode] = e.type == 'keydown';
+    controller.keyCodes[e.keyCode] = e.type == 'keydown';
     /* insert conditional here */
-    keyboard.update();
+    controller.update();
 }
